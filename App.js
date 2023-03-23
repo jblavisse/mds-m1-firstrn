@@ -1,11 +1,11 @@
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 import DailyTransactions from "./components/DailyTransactions";
-import SearchBar from "./components/SearchBar";
 import { useState } from "react";
 
 export default function App() {
   const [allDaysTransactions] = useState([
     {
+      id: 1,
       date: "Lundi 23 mars 2023",
       transactions: [
         { type: "Netflix", category: "Loisirs", price: 9.99 },
@@ -17,6 +17,7 @@ export default function App() {
       ],
     },
     {
+      id: 2,
       date: "Dimanche 22 mars 2023",
       transactions: [
         { type: "McDonald's", category: "Restaurants", price: 14.79 },
@@ -28,6 +29,7 @@ export default function App() {
       ],
     },
     {
+      id: 3,
       date: "Samedi 21 mars 2023",
       transactions: [
         { type: "Amazon", category: "Shopping", price: 29.39 },
@@ -48,12 +50,16 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <ScrollView>
-        <SearchBar />
-        {allDaysTransactions.map((day) => (
-          <DailyTransactions date={day.date} transactions={day.transactions} />
-        ))}
-      </ScrollView>
+      <FlatList
+        data={allDaysTransactions}
+        renderItem={({ item }) => (
+          <DailyTransactions
+            date={item.date}
+            transactions={item.transactions}
+          />
+        )}
+        keyExtractor={(day) => day.id.toString()}
+      />
     </View>
   );
 }
