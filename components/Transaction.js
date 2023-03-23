@@ -18,15 +18,13 @@ export default function Transaction({ type, price, category }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     justifyContent: "center",
     flexDirection: "row",
   },
   transaction: {
-    backgroundColor: "#fff",
-    flex: 1,
     flexDirection: "row",
     justifyContent: "space-between",
+    alignItems: "center",
     borderColor: "#ddd",
     borderBottomWidth: 1,
     width: "90%",
