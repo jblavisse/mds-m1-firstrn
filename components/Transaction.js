@@ -1,17 +1,28 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity, Text } from "react-native";
 import React from "react";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Transaction({ type, price, category }) {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <View style={styles.transaction}>
+      <TouchableOpacity
+        style={styles.transaction}
+        onPress={() =>
+          navigation.navigate("Transaction", {
+            type: type,
+            price: price,
+            category: category,
+          })
+        }
+      >
         <View style={styles.transactionText}>
           <Text>{type}</Text>
           <Text style={styles.category}>{category}</Text>
         </View>
 
         <Text>{price}€</Text>
-      </View>
+      </TouchableOpacity>
     </View>
   );
 }

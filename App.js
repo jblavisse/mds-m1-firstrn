@@ -1,73 +1,17 @@
-import { FlatList, StyleSheet, View } from "react-native";
-import DailyTransactions from "./components/DailyTransactions";
-import { useState } from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import HomeScreen from "./screens/HomeScreen";
+import TransactionScreen from "./screens/TransactionScreen";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+const Stack = createNativeStackNavigator();
 
 export default function App() {
-  const [allDaysTransactions] = useState([
-    {
-      id: 1,
-      date: "Lundi 23 mars 2023",
-      transactions: [
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-        { type: "Netflix", category: "Loisirs", price: 9.99 },
-      ],
-    },
-    {
-      id: 2,
-      date: "Dimanche 22 mars 2023",
-      transactions: [
-        { type: "McDonald's", category: "Restaurants", price: 14.79 },
-        {
-          type: "Starbucks",
-          category: "Restaurants",
-          price: 3.29,
-        },
-      ],
-    },
-    {
-      id: 3,
-      date: "Samedi 21 mars 2023",
-      transactions: [
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-        { type: "Amazon", category: "Shopping", price: 29.39 },
-      ],
-    },
-  ]);
-
   return (
-    <View style={styles.container}>
-      <FlatList
-        data={allDaysTransactions}
-        renderItem={({ item }) => (
-          <DailyTransactions
-            date={item.date}
-            transactions={item.transactions}
-          />
-        )}
-        keyExtractor={(day) => day.id.toString()}
-      />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Transaction" component={TransactionScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#ddd",
-    marginTop: 20,
-    flex: 1,
-  },
-});
